@@ -1,0 +1,31 @@
+public class PontuacaoCliente{ 
+	private EstatisticaCliente estatistica;
+	public double pontuacao;
+	
+
+    public PontuacaoCliente(EstatisticaCliente estatistica){ 
+		this.estatistica = estatistica;
+    } 
+	
+	public double pontuacaoCliente(int nroConta, int mes, int ano){
+		return pontuacaoSaldoMedio(nroConta,mes,ano)+pontuacaoValorMedioOperacoes(nroConta,mes,ano)-pontuacaoSaldoMedioNegativoMes(nroConta,mes,ano);
+	}
+
+    public double pontuacaoSaldoMedio(int nroConta,int mes,int ano){ 
+		return (1000*(estatistica.saldoMedioMes(nroConta,mes,ano)%1000))
+    } 
+
+
+    public double pontuacaoValorMedioOperacoes(int nroConta,int mes,int ano){ 
+		if estatistica.valorMedioOperacoes(nroConta,mes,ano) > 300 {
+			return (100*(estatistica.valorMedioOperacoes(nroConta,mes,ano)%100))
+		}
+    } 
+	
+    public double pontuacaoSaldoMedioNegativoMes(int nroConta,int mes,int ano){ 
+		if estatistica.saldoMedioNegativoMes(nroConta,mes,ano) > 500 {
+			return (100*(estatistica.saldoMedioNegativoMes(nroConta,mes,ano) % 100) /2.0) 
+		}
+    }
+
+} 
