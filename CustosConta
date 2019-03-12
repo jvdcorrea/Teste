@@ -1,0 +1,37 @@
+public class CustosConta{
+	private EstatisticaCliente estatistica;
+	private PontuacaoCliente pontuacao;
+	
+	
+	CustosConta(EstatisticaCliente estatistica, PontuacaoCliente pontuacao){
+		this.estatistica = estatistica;
+		this.pontuacao = pontuacao;		
+	}
+	
+	
+	public double jurosNoMes(int nroConta, int mes, int ano){
+		return estatistica.saldoMedioNegativoMes(nroConta, mes, ano) * 0.003;
+	}
+	
+	
+	public double taxaNoMes(int nroConta, int mes, int ano){
+		double pont  = pontuacao.pontuacaoValorMedioOperacoes(nroConta, mes, ano);
+		
+		if(pont < 20000){
+			if(pont < 10000){
+				if(pont < 5000){
+					return 100;
+				}else{
+					return 70;
+				}
+			}else{
+				return 50;
+			}		
+		}else{
+			return 0;
+		}
+		
+	}
+	
+
+}
